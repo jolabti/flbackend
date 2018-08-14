@@ -109,7 +109,75 @@ class V1 extends REST_Controller {
 
 
 
+    // Get collection
 
+    public function done_get(){
+      	$pass["data"]=$this->Manufriend_model->mm_show_done();
+
+        if ($pass["data"]!=null){
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        }
+        else{
+             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+
+    public function shopping_get(){
+	      $pass["data"]=$this->Manufriend_model->mm_show_shopping();
+        if ($pass["data"]!=null){
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        }
+        else{
+             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function chitchat_get(){
+        $pass["data"]=$this->Manufriend_model->mm_show_chit_chat();
+        if ($pass["data"]!=null){
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        }
+        else{
+             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+
+    public function sport_get(){
+        $pass["data"]=$this->Manufriend_model->mm_show_sport();
+        if ($pass["data"]!=null){
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        }
+        else{
+             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function attendingparty_get(){
+        $pass["data"]=$this->Manufriend_model->mm_show_attending_party();
+        if ($pass["data"]!=null){
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        }
+        else{
+             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function all_request_get(){
+        $pass["data"]=$this->Manufriend_model->mm_show_request();
+        if ($pass["data"]!=null){
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        }
+        else{
+             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+
+
+
+    //======================================================================
     public function users_post()
     {
         // $this->some_model->update_user( ... );
@@ -150,7 +218,48 @@ class V1 extends REST_Controller {
         $this->set_response($message, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
       }
 
-    }
+   }
+
+   public function register_post(){
+     $dataParsing = array(
+       "id_user"=>"",
+
+       //andri diganti dengan $this->input->post('namauser');
+       "nama_user"=>$this->post('nama_user'),
+       "email_user"=>$this->post('email_user'),
+       "password_user"=>$this->post('password_user'),
+       "telepon_user"=>$this->post('telepon_user'),
+       "alamat_user"=>$this->post('alamat_user'),
+       "gender_user"=>$this->post('gender_user'),
+       "ttl_user"=> date('y-m-d'),
+       "role_user"=> 2
+     );
+
+     $cekemail = $this->Manufriend_model->mm_cek_email($dataParsing['email_user']);
+
+
+         		if($dataParsing!=null && $cekemail<1){
+         			$data["message"] = "Data Anda berhasil didaftarkan";
+         			$this->Manufriend_model->mm_insert_new_user($dataParsing);
+              $this->set_response($data, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
+
+         		}
+         		else if($cekemail>0){
+          		$data["message"] = "Data Anda sudah pernah didaftarkan";
+              $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
+
+         		}
+         		else{
+          		$data["message"] = "Koneksi gagal";
+              $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
+
+         		}
+
+
+
+   }
+
+
 
 
 }
