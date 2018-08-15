@@ -210,7 +210,7 @@ class V1 extends REST_Controller {
       }
       else{
         $message = [
-            'name' => $this->post('name'),
+            'name' => "",
             'email' => $this->post('email'),
             'message' => 'Gagal Login'
         ];
