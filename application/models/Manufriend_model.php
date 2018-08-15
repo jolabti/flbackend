@@ -15,7 +15,7 @@
 					//  header("Access-Control-Allow-Methods: GET");
 					//  header("Access-Control-Max-Age: 3600");
 					//  header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
- 
+
 
 				}
 
@@ -189,5 +189,12 @@
 		        $q = $this->db->get();
 		        return $q->result();
 		    }
+
+				public function mm_show_price_service($idService){
+
+						$this->db->where("id_service",$idService);
+						$q =  $this->db->get("manufriend_service");
+						return $q->row();
+				}
 
 		}

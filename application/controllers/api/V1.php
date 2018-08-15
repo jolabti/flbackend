@@ -174,6 +174,19 @@ class V1 extends REST_Controller {
         }
     }
 
+    public function pricetag_get($id){
+
+        $pass["data"]=$this->Manufriend_model->mm_show_price_service($id);
+
+        if ($pass["data"]!=null){
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        }
+        else{
+            $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+
+    }
+
 
 
 
