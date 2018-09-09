@@ -272,6 +272,21 @@ class V1 extends REST_Controller {
 
    }
 
+   public function version_get(){
+
+          $data = $this->Manufriend_model->mm_show_current_version();
+          if($data!=""|| $data!=NULL){
+
+          //  $data["message"] = "Versi sekarang";
+            $this->set_response($data, REST_Controller::HTTP_OK); // Oke
+          }
+
+          else{
+            $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // Error
+          }
+
+   }
+
 
 
 

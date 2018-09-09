@@ -63,6 +63,9 @@
 		    }
 
 		    public function mm_show_transaction(){
+
+
+						// $query = $this->db->query("Select * from ");
 		        $this->db->select('*');
 		        $this->db->from('manufriend_user');
 		        $this->db->join('manufriend_transaction', 'manufriend_user.id_user = manufriend_transaction.id_user');
@@ -196,5 +199,13 @@
 						$q =  $this->db->get("manufriend_service");
 						return $q->row();
 				}
+
+				public function mm_show_current_version(){
+
+					$this->db->where("status",1);
+					$q =  $this->db->get("manufriend_version");
+					return $q->row();
+				}
+
 
 		}
