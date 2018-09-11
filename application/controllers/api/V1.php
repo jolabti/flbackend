@@ -196,22 +196,32 @@ class V1 extends REST_Controller
     {
         $is_exist =    $this->Manufriend_model->mm_cek_user($this->post("email"), $this->post("password"));
         $user_profile = $this->Manufriend_model->mm_data_user($this->post("email"), $this->post("password"));
-
+        $rolesyou="";
         if ($is_exist>0) {
+            if ($user_profile->role_user==3) {
+                $rolesyou="Agen";
+            } elseif ($user_profile->role_user==2) {
+                $rolesyou="Admin";
+            } elseif ($user_profile->role_user==1) {
+                $rolesyou="User";
+            }
+
             $message = [
 
-            'name' => $user_profile->email_user,
-            'email' => $this->post('email'),
-            'message' => 'Berhasil Login'
+            'id_user' => $user_profile->id_user,
+            'name' => $user_profile->nama_user,
+            'email' =>$user_profile->email_user,
+            'message' => 'Berhasil Login',
+            'alamat' => $user_profile->alamat_user,
+            'rolesyou'=> $rolesyou
         ];
 
             $this->set_response($message, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
         } else {
             $message = [
-            'name' => "",
-            'email' => $this->post('email'),
-            'message' => 'Gagal Login'
-        ];
+
+              'message' => 'Gagal Login',
+         ];
 
             $this->set_response($message, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
         }
