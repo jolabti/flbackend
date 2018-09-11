@@ -2,7 +2,8 @@
 //use Restserver\Libraries\REST_Controller;
 require APPPATH . 'libraries/REST_Controller.php';
 use Restserver\Libraries\REST_Controller;
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+defined('BASEPATH') or exit('No direct script access allowed');
 
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 /** @noinspection PhpIncludeInspection */
@@ -19,9 +20,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @license         MIT
  * @link            https://github.com/chriskacerguis/codeigniter-restserver
  */
-class V1 extends REST_Controller {
-
-    function __construct()
+class V1 extends REST_Controller
+{
+    public function __construct()
     {
         // Construct the parent class
         parent::__construct();
@@ -49,19 +50,15 @@ class V1 extends REST_Controller {
 
         // If the id parameter doesn't exist return all the users
 
-        if ($id === NULL)
-        {
+        if ($id === null) {
             // Check if the users data store contains users (in case the database result returns NULL)
-            if ($users)
-            {
+            if ($users) {
                 // Set the response and exit
                 $this->response($users, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
-            }
-            else
-            {
+            } else {
                 // Set the response and exit
                 $this->response([
-                    'status' => FALSE,
+                    'status' => false,
                     'message' => 'No users were found'
                 ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
             }
@@ -72,36 +69,29 @@ class V1 extends REST_Controller {
         $id = (int) $id;
 
         // Validate the id.
-        if ($id <= 0)
-        {
+        if ($id <= 0) {
             // Invalid id, set the response and exit.
-            $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+            $this->response(null, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
 
         // Get the user from the array, using the id as key for retrieval.
         // Usually a model is to be used for this.
 
-        $user = NULL;
+        $user = null;
 
-        if (!empty($users))
-        {
-            foreach ($users as $key => $value)
-            {
-                if (isset($value['id']) && $value['id'] === $id)
-                {
+        if (!empty($users)) {
+            foreach ($users as $key => $value) {
+                if (isset($value['id']) && $value['id'] === $id) {
                     $user = $value;
                 }
             }
         }
 
-        if (!empty($user))
-        {
+        if (!empty($user)) {
             $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
-        }
-        else
-        {
+        } else {
             $this->set_response([
-                'status' => FALSE,
+                'status' => false,
                 'message' => 'User could not be found'
             ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
         }
@@ -111,80 +101,78 @@ class V1 extends REST_Controller {
 
     // Get collection
 
-    public function done_get(){
-      	$pass["data"]=$this->Manufriend_model->mm_show_done();
+    public function done_get()
+    {
+        $pass["data"]=$this->Manufriend_model->mm_show_done();
 
-        if ($pass["data"]!=null){
+        if ($pass["data"]!=null) {
             $this->set_response($pass, REST_Controller::HTTP_OK);
-        }
-        else{
-             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
-        }
-    }
-
-
-    public function shopping_get(){
-	      $pass["data"]=$this->Manufriend_model->mm_show_shopping();
-        if ($pass["data"]!=null){
-            $this->set_response($pass, REST_Controller::HTTP_OK);
-        }
-        else{
-             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
-        }
-    }
-
-    public function chitchat_get(){
-        $pass["data"]=$this->Manufriend_model->mm_show_chit_chat();
-        if ($pass["data"]!=null){
-            $this->set_response($pass, REST_Controller::HTTP_OK);
-        }
-        else{
-             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
-        }
-    }
-
-
-    public function sport_get(){
-        $pass["data"]=$this->Manufriend_model->mm_show_sport();
-        if ($pass["data"]!=null){
-            $this->set_response($pass, REST_Controller::HTTP_OK);
-        }
-        else{
-             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
-        }
-    }
-
-    public function attendingparty_get(){
-        $pass["data"]=$this->Manufriend_model->mm_show_attending_party();
-        if ($pass["data"]!=null){
-            $this->set_response($pass, REST_Controller::HTTP_OK);
-        }
-        else{
-             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
-        }
-    }
-
-    public function all_request_get(){
-        $pass["data"]=$this->Manufriend_model->mm_show_request();
-        if ($pass["data"]!=null){
-            $this->set_response($pass, REST_Controller::HTTP_OK);
-        }
-        else{
-             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
-        }
-    }
-
-    public function pricetag_get($id){
-
-        $pass["data"]=$this->Manufriend_model->mm_show_price_service($id);
-
-        if ($pass["data"]!=null){
-            $this->set_response($pass, REST_Controller::HTTP_OK);
-        }
-        else{
+        } else {
             $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
         }
+    }
 
+
+    public function shopping_get()
+    {
+        $pass["data"]=$this->Manufriend_model->mm_show_shopping();
+        if ($pass["data"]!=null) {
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        } else {
+            $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function chitchat_get()
+    {
+        $pass["data"]=$this->Manufriend_model->mm_show_chit_chat();
+        if ($pass["data"]!=null) {
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        } else {
+            $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+
+    public function sport_get()
+    {
+        $pass["data"]=$this->Manufriend_model->mm_show_sport();
+        if ($pass["data"]!=null) {
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        } else {
+            $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function attendingparty_get()
+    {
+        $pass["data"]=$this->Manufriend_model->mm_show_attending_party();
+        if ($pass["data"]!=null) {
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        } else {
+            $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function all_request_get()
+    {
+        $pass["data"]=$this->Manufriend_model->mm_show_request();
+        if ($pass["data"]!=null) {
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        } else {
+            $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
+
+    public function pricetag_get($id)
+    {
+        $pass["data"]=$this->Manufriend_model->mm_show_price_service($id);
+
+        if ($pass["data"]!=null) {
+            $this->set_response($pass, REST_Controller::HTTP_OK);
+        } else {
+            $this->set_response($pass, REST_Controller::HTTP_NOT_FOUND);
+        }
     }
 
 
@@ -204,37 +192,34 @@ class V1 extends REST_Controller {
         $this->set_response($message, REST_Controller::HTTP_CREATED); // CREATED (201) being the HTTP response code
     }
 
-    public function auth_post(){
+    public function auth_post()
+    {
+        $is_exist =    $this->Manufriend_model->mm_cek_user($this->post("email"), $this->post("password"));
+        $user_profile = $this->Manufriend_model->mm_data_user($this->post("email"), $this->post("password"));
 
-      $is_exist =	$this->Manufriend_model->mm_cek_user($this->post("email"), $this->post("password"));
-      $user_profile = $this->Manufriend_model->mm_data_user($this->post("email"), $this->post("password"));
-
-      if($is_exist>0){
-
-        $message = [
+        if ($is_exist>0) {
+            $message = [
 
             'name' => $user_profile->email_user,
             'email' => $this->post('email'),
             'message' => 'Berhasil Login'
         ];
 
-        $this->set_response($message, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
-
-      }
-      else{
-        $message = [
+            $this->set_response($message, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
+        } else {
+            $message = [
             'name' => "",
             'email' => $this->post('email'),
             'message' => 'Gagal Login'
         ];
 
-        $this->set_response($message, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
-      }
+            $this->set_response($message, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
+        }
+    }
 
-   }
-
-   public function register_post(){
-     $dataParsing = array(
+    public function register_post()
+    {
+        $dataParsing = array(
        "id_user"=>"",
 
        //andri diganti dengan $this->input->post('namauser');
@@ -248,46 +233,53 @@ class V1 extends REST_Controller {
        "role_user"=> 2
      );
 
-     $cekemail = $this->Manufriend_model->mm_cek_email($dataParsing['email_user']);
+        $cekemail = $this->Manufriend_model->mm_cek_email($dataParsing['email_user']);
 
 
-         		if($dataParsing!=null && $cekemail<1){
-         			$data["message"] = "Data Anda berhasil didaftarkan";
-         			$this->Manufriend_model->mm_insert_new_user($dataParsing);
-              $this->set_response($data, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
+        if ($dataParsing!=null && $cekemail<1) {
+            $data["message"] = "Data Anda berhasil didaftarkan";
+            $this->Manufriend_model->mm_insert_new_user($dataParsing);
+            $this->set_response($data, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
+        } elseif ($cekemail>0) {
+            $data["message"] = "Data Anda sudah pernah didaftarkan";
+            $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
+        } else {
+            $data["message"] = "Koneksi gagal";
+            $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
+        }
+    }
 
-         		}
-         		else if($cekemail>0){
-          		$data["message"] = "Data Anda sudah pernah didaftarkan";
-              $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
+    public function transaction_post()
+    {
+        $dataParsing = array(
+      "id_user"=>"",
 
-         		}
-         		else{
-          		$data["message"] = "Koneksi gagal";
-              $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // CREATED (201) being the HTTP response code
+      "id_user"=>$this->post('id_user'),
+      "id_service"=>$this->post('id_service'),
+      "id_status"=>$this->post('id_status'),
+      "tanggal_order"=>$this->post('tanggal_order'),
+      "pukul_trx"=>$this->post('pukul_trx'),
+      "durasi"=>$this->post('durasi'),
+      "total_harga"=>$this->post('total_harga'),
+      "notes"=>$this->post('notes'),
+    );
 
-         		}
+        $cekmasuk = $this->Manufriend_model->mm_insert_transaction($dataParsing);
 
 
+        $data["message"] = "Berhasil melakukan transaksi";
+        $this->set_response($data, REST_Controller::HTTP_OK);
+    }
 
-   }
-
-   public function version_get(){
-
-          $data = $this->Manufriend_model->mm_show_current_version();
-          if($data!=""|| $data!=NULL){
+    public function version_get()
+    {
+        $data = $this->Manufriend_model->mm_show_current_version();
+        if ($data!=""|| $data!=null) {
 
           //  $data["message"] = "Versi sekarang";
             $this->set_response($data, REST_Controller::HTTP_OK); // Oke
-          }
-
-          else{
+        } else {
             $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // Error
-          }
-
-   }
-
-
-
-
+        }
+    }
 }
