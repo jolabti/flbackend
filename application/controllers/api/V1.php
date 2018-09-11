@@ -252,16 +252,16 @@ class V1 extends REST_Controller
     public function transaction_post()
     {
         $dataParsing = array(
-      "id_user"=>"",
+          "id_user"=>"",
 
-      "id_user"=>$this->post('id_user'),
-      "id_service"=>$this->post('id_service'),
-      "id_status"=>$this->post('id_status'),
-      "tanggal_order"=>$this->post('tanggal_order'),
-      "pukul_trx"=>$this->post('pukul_trx'),
-      "durasi"=>$this->post('durasi'),
-      "total_harga"=>$this->post('total_harga'),
-      "notes"=>$this->post('notes'),
+          "id_user"=>$this->post('id_user'),
+          "id_service"=>$this->post('id_service'),
+          "id_status"=>$this->post('id_status'),
+          "tanggal_order"=>$this->post('tanggal_order'),
+          "pukul_trx"=>$this->post('pukul_trx'),
+          "durasi"=>$this->post('durasi'),
+          "total_harga"=>$this->post('total_harga'),
+          "notes"=>$this->post('notes')
     );
 
         $cekmasuk = $this->Manufriend_model->mm_insert_transaction($dataParsing);
