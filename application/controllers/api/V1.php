@@ -281,6 +281,17 @@ class V1 extends REST_Controller
         $this->set_response($data, REST_Controller::HTTP_OK);
     }
 
+    public function riwayat_get($id)
+    {
+        $query = $this->Manufriend_model->mm_get_transaction($id);
+
+        if ($query!="" || $query!=null) {
+            $this->set_response($query, REST_Controller::HTTP_OK); // Oke
+        } else {
+            $this->set_response($query, REST_Controller::HTTP_NOT_FOUND); // Error
+        }
+    }
+
     public function version_get()
     {
         $data = $this->Manufriend_model->mm_show_current_version();

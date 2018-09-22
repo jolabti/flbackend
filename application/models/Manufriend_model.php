@@ -230,4 +230,17 @@
             {
                 $this->db->insert('manufriend_transaction', $data);
             }
+
+            public function mm_get_transaction($id)
+            {
+                // $this->db->where("id_user", $id);
+                // $query = $this->db->get('manufriend_transaction');
+                // return $query->result();
+                $this->db->select('*');
+                $this->db->from('manufriend_user');
+                $this->db->join('manufriend_transaction', 'manufriend_user.id_user = manufriend_transaction.id_user');
+                $this->db->where("manufriend_transaction.id_user", $id);
+                $query = $this->db->get();
+                return $query->result();
+            }
         }
