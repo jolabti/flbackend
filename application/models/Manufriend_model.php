@@ -243,4 +243,16 @@
                 $query = $this->db->get();
                 return $query->result();
             }
+
+
+            public function mm_get_itemriwayat($idrecord)
+            {
+                $this->db->select('manufriend_user.nama_user, manufriend_transaction.tanggal_trx, manufriend_transaction.total_harga,  manufriend_transaction.id_status, manufriend_service.nama_service');
+                $this->db->from('manufriend_user');
+                $this->db->join('manufriend_transaction', 'manufriend_user.id_user = manufriend_transaction.id_user');
+                $this->db->join('manufriend_service', 'manufriend_service.id_service = manufriend_transaction.id_service');
+                $this->db->where("manufriend_transaction.id_trx", $idrecord);
+                $query = $this->db->get();
+                return $query->row();
+            }
         }
