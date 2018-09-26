@@ -259,6 +259,39 @@ class V1 extends REST_Controller
         }
     }
 
+    public function updateuser_post($iduser)
+    {
+        $dataParsing = array(
+           //andri diganti dengan $this->input->post('namauser');
+
+           "nama_user"=>$this->post('nama_user'),
+           "email_user"=>$this->post('email_user'),
+           "password_user"=>$this->post('password_user'),
+           "telepon_user"=>$this->post('telepon_user'),
+           "alamat_user"=>$this->post('alamat_user'),
+           "gender_user"=>$this->post('gender_user'),
+           "ttl_user"=> date('y-m-d'),
+           "role_user"=> 2
+       );
+
+        if ($dataParsing!=null) {
+            $data["message"] = "Data profil berhasil diperbaharui";
+            $this->Manufriend_model->mm_insert_new_user($iduser, $dataParsing);
+            $this->set_response($data, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
+        }
+    }
+
+    public function getuser_get($iduser)
+    {
+        $data = $this->Manufriend_model->mm_get_datauserbyid($iduser);
+
+        if ($data!=null) {
+            $this->set_response($data, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
+        } else {
+            $this->set_response("Data tidak ada", REST_Controller::HTTP_NOT_FOUND); // CREATED (201) being the HTTP response code
+        }
+    }
+
     public function transaction_post()
     {
         $dataParsing = array(

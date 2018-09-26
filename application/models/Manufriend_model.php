@@ -23,16 +23,29 @@
             {
                 $this->db->insert('manufriend_user', $data);
             }
+
+
+            public function mm_update_user($iduser, $data)
+            {
+                $this->db->where('id_user', $iduser);
+                $this->db->update('manufriend_user', $data);
+            }
+
+
+
+
+
             public function mm_delete_user($data)
             {
                 $this->db->where($data);
                 $this->db->delete('manufriend_user', $data);
             }
-            public function mm_update_user($data)
-            {
-                $this->db->where($data);
-                $this->db->update('manufriend_user', $data);
-            }
+
+            // public function mm_update_user($data)
+            // {
+            //     $this->db->where($data);
+            //     $this->db->update('manufriend_user', $data);
+            // }
 
             //=====================================================
             //
@@ -255,6 +268,17 @@
                 $this->db->join('manufriend_service', 'manufriend_service.id_service = manufriend_transaction.id_service');
                 $this->db->where("manufriend_transaction.id_trx", $idrecord);
                 $query = $this->db->get();
+                return $query->row();
+            }
+
+            public function mm_get_datauserbyid($iduser)
+            {
+                $this->db->select('*');
+                $this->db->from('manufriend_user');
+                $this->db->where("id_user", $iduser);
+
+                $query = $this->db->get();
+
                 return $query->row();
             }
         }
