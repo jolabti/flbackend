@@ -276,7 +276,7 @@ class V1 extends REST_Controller
 
         if ($dataParsing!=null) {
             $data["message"] = "Data profil berhasil diperbaharui";
-            $this->Manufriend_model->mm_insert_new_user($iduser, $dataParsing);
+            $this->Manufriend_model->mm_update_user($iduser, $dataParsing);
             $this->set_response($data, REST_Controller::HTTP_OK); // CREATED (201) being the HTTP response code
         }
     }
