@@ -284,7 +284,7 @@
 
             public function mm_show_ongoing($iduser)
             {
-                $this->db->select('*');
+                $this->db->select('manufriend_transaction.tanggal_trx,manufriend_service.nama_service');
                 $this->db->from('manufriend_user');
                 $this->db->join('manufriend_transaction', 'manufriend_user.id_user = manufriend_transaction.id_user');
                 $this->db->join('manufriend_service', 'manufriend_service.id_service = manufriend_transaction.id_service');
