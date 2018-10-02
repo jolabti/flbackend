@@ -347,4 +347,15 @@ class V1 extends REST_Controller
             $this->set_response($data, REST_Controller::HTTP_UNAUTHORIZED); // Error
         }
     }
+
+    public function ongoing_get()
+    {
+        $data = $this->Manufriend_model->mm_show_ongoing();
+
+        if ($data!="" || $data!=null) {
+            $this->set_response($data, REST_Controller::HTTP_OK);
+        } else {
+            $this->set_response($data, REST_Controller::HTTP_NOT_FOUND);
+        }
+    }
 }

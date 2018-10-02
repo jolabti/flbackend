@@ -134,18 +134,18 @@
                 return $q->result();
             }
 
-            public function mm_show_ongoing()
-            {
-                $this->db->select('*');
-                $this->db->from('manufriend_user');
-                $this->db->join('manufriend_transaction', 'manufriend_user.id_user = manufriend_transaction.id_user');
-                $this->db->join('manufriend_service', 'manufriend_service.id_service = manufriend_transaction.id_service');
-                // $this->db->join('manufriend_status', 'manufriend_status.id_status = manufriend_transaction.id_status');
-                $this->db->where('id_status', 2);
-
-                $q = $this->db->get();
-                return $q->result();
-            }
+            // public function mm_show_ongoing()
+            // {
+            //     $this->db->select('*');
+            //     $this->db->from('manufriend_user');
+            //     $this->db->join('manufriend_transaction', 'manufriend_user.id_user = manufriend_transaction.id_user');
+            //     $this->db->join('manufriend_service', 'manufriend_service.id_service = manufriend_transaction.id_service');
+            //     // $this->db->join('manufriend_status', 'manufriend_status.id_status = manufriend_transaction.id_status');
+            //     $this->db->where('id_status', 2);
+            //
+            //     $q = $this->db->get();
+            //     return $q->result();
+            // }
 
             public function mm_show_done()
             {
@@ -280,5 +280,18 @@
                 $query = $this->db->get();
 
                 return $query->row();
+            }
+
+            public function mm_show_ongoing()
+            {
+                $this->db->select('*');
+                $this->db->from('manufriend_user');
+                $this->db->join('manufriend_transaction', 'manufriend_user.id_user = manufriend_transaction.id_user');
+                $this->db->join('manufriend_service', 'manufriend_service.id_service = manufriend_transaction.id_service');
+                $this->db->join('manufriend_status', 'manufriend_status.id_status = manufriend_transaction.id_status');
+                $this->db->where('manufriend_status.id_status', 2);
+
+                $q = $this->db->get();
+                return $q->result();
             }
         }
