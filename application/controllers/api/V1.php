@@ -348,9 +348,9 @@ class V1 extends REST_Controller
         }
     }
 
-    public function ongoing_get()
+    public function ongoing_get($id)
     {
-        $data = $this->Manufriend_model->mm_show_ongoing();
+        $data = $this->Manufriend_model->mm_show_ongoing($id);
 
         if ($data!="" || $data!=null) {
             $this->set_response($data, REST_Controller::HTTP_OK);
