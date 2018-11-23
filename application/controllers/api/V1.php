@@ -239,7 +239,8 @@ class V1 extends REST_Controller
        "telepon_user"=>$this->post('telepon_user'),
        "alamat_user"=>$this->post('alamat_user'),
        "gender_user"=>$this->post('gender_user'),
-       "ttl_user"=> date('y-m-d'),
+       //"ttl_user"=> date('y-m-d'),
+       "ttl_user"=> $this->input->post('ttl_user'),
        "role_user"=> 2
      );
 
